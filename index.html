@@ -5,119 +5,377 @@
     <title>Portfolio M&A – Edouard</title>
 
     <style>
+        :root {
+            --bg: #0b1020;
+            --card-bg: #ffffff;
+            --accent: #1f4f82;
+            --accent-light: #2f6faf;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: radial-gradient(circle at top, #1c2840 0, #050814 55%, #020308 100%);
+            color: var(--text-main);
         }
 
-        /* Menu onglets */
-        .navbar {
-            display: flex;
-            background-color: #1a1a1a;
-            padding: 10px;
+        /* Conteneur global */
+        .layout {
+            max-width: 980px;
+            margin: 40px auto 60px auto;
+            padding: 0 16px 40px 16px;
         }
 
-        .navbar a {
+        /* En-tête */
+        .header-card {
+            background: linear-gradient(135deg, #111827, #020617);
+            border-radius: 18px;
+            padding: 22px 24px 20px;
+            margin-bottom: 18px;
             color: white;
-            padding: 14px 20px;
-            text-decoration: none;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .name-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .name-title h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 0.03em;
+        }
+
+        .name-title span {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        .header-tagline {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .header-pill {
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            padding: 6px 12px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: #e5e7eb;
+            white-space: nowrap;
+        }
+
+        /* Barre d’onglets */
+        .navbar-wrap {
+            margin-top: 10px;
+        }
+
+        .navbar {
+            display: inline-flex;
+            background-color: rgba(15, 23, 42, 0.8);
+            border-radius: 999px;
+            padding: 4px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .navbar button {
+            border: none;
+            background: transparent;
+            color: #e5e7eb;
+            padding: 8px 18px;
+            margin: 0 2px;
+            border-radius: 999px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
-        .navbar a:hover {
-            background-color: #333;
+        .navbar button.active {
+            background: linear-gradient(135deg, #1f4f82, #2563eb);
+            color: #f9fafb;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
         }
 
-        /* Contenu */
+        .navbar button:hover:not(.active) {
+            background-color: rgba(31, 41, 55, 0.85);
+        }
+
+        /* Cartes onglets */
         .tab {
             display: none;
-            padding: 25px;
-            background: white;
-            margin: 20px;
-            border-radius: 10px;
+            background: var(--card-bg);
+            padding: 24px 24px 20px;
+            margin-top: 18px;
+            border-radius: 16px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.35);
         }
 
-        /* Liste des PDF */
+        .tab h2 {
+            margin-top: 0;
+            margin-bottom: 4px;
+            font-size: 20px;
+        }
+
+        .tab-subtitle {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Liste des documents */
         ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        li {
-            margin-bottom: 12px;
+        li + li {
+            margin-top: 10px;
         }
 
-        a.pdf-link {
-            color: #0056a3;
-            font-size: 18px;
+        .doc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .doc-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .doc-title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .doc-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .open-link {
+            font-size: 12px;
             text-decoration: none;
+            border-radius: 999px;
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            color: var(--accent);
+            background-color: #f9fafb;
+            white-space: nowrap;
         }
 
-        a.pdf-link:hover {
-            text-decoration: underline;
+        .open-link:hover {
+            border-color: var(--accent-light);
+            color: #0b1740;
+        }
+
+        /* Bas de page */
+        .footer {
+            margin-top: 18px;
+            font-size: 11px;
+            color: #9ca3af;
+            text-align: right;
+        }
+
+        @media (max-width: 640px) {
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .navbar button {
+                flex: 1;
+                text-align: center;
+                padding-inline: 10px;
+            }
+
+            .doc-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .open-link {
+                margin-top: 4px;
+            }
         }
     </style>
 
     <script>
         function openTab(tabName) {
-            var i, tabContent;
-            tabContent = document.getElementsByClassName("tab");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
+            // Masque tout
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
             }
+
+            // Désactive tous les boutons
+            var buttons = document.querySelectorAll(".navbar button");
+            buttons.forEach(function(btn) {
+                btn.classList.remove("active");
+            });
+
+            // Affiche l’onglet demandé
             document.getElementById(tabName).style.display = "block";
+
+            // Active le bouton correspondant
+            var btnToActivate = document.querySelector('.navbar button[data-tab="' + tabName + '"]');
+            if (btnToActivate) {
+                btnToActivate.classList.add("active");
+            }
         }
-    </script>
 
+        // Initialise sur OnePagers
+        window.onload = function () {
+            openTab('onepagers');
+        };
+    </script>
 </head>
+
 <body>
+    <div class="layout">
+        <!-- En-tête -->
+        <div class="header-card">
+            <div class="header-top">
+                <div class="name-title">
+                    <h1>Edouard – M&amp;A / Investment Banking</h1>
+                    <span>Transaction Analysis · Valuation · Financial Modelling</span>
+                </div>
+                <div class="header-pill">
+                    M&amp;A Deal Material Portfolio
+                </div>
+            </div>
+            <p class="header-tagline">
+                Sélection de travaux (one-pagers, analyses d’investissement et rapports de valorisation)
+présentés dans un format synthétique pour les recruteurs en banque d’affaires, M&amp;A et private equity.
+            </p>
 
-    <!-- Menu -->
-    <div class="navbar">
-        <a onclick="openTab('onepagers')">OnePagers</a>
-        <a onclick="openTab('investment')">Investment Analysis</a>
-        <a onclick="openTab('valuation')">Valuation Report</a>
+            <!-- Onglets -->
+            <div class="navbar-wrap">
+                <div class="navbar">
+                    <button type="button" data-tab="onepagers" onclick="openTab('onepagers')">OnePagers</button>
+                    <button type="button" data-tab="investment" onclick="openTab('investment')">Investment Analysis</button>
+                    <button type="button" data-tab="valuation" onclick="openTab('valuation')">Valuation Report</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglet 1 : OnePagers -->
+        <div id="onepagers" class="tab">
+            <h2>OnePagers</h2>
+            <p class="tab-subtitle">
+                Synthèse de dossiers M&amp;A sous format one-pager (positionnement stratégique, rationales, KPIs clés, éléments de valorisation).
+            </p>
+
+            <ul>
+                <li>
+                    <div class="doc-item">
+                        <div class="doc-main">
+                            <span class="doc-title">OnePager – TotalEnergies</span>
+                            <span class="doc-meta">Sector: Energy · Focus: Strategic rationale &amp; key financials</span>
+                        </div>
+                        <a class="open-link" href="pitchbooks/TotalEnergies_OnePager.pdf" target="_blank">Open PDF</a>
+                    </div>
+                </li>
+                <!-- Tu peux ajouter d’autres one-pagers ici -->
+            </ul>
+        </div>
+
+        <!-- Onglet 2 : Investment Analysis -->
+        <div id="investment" class="tab">
+            <h2>Investment Analysis</h2>
+            <p class="tab-subtitle">
+                Analyses d’investissement incluant hypothèses opérationnelles, scénarios, sensibilité et modélisation financière (LBO, DCF, etc.).
+            </p>
+
+            <ul>
+                <li>
+                    <div class="doc-item">
+                        <div class="doc-main">
+                            <span class="doc-title">LBO Model</span>
+                            <span class="doc-meta">Type: Leveraged Buyout · Format: PDF export / model overview</span>
+                        </div>
+                        <a class="open-link" href="modeles/model_lbo.pdf" target="_blank">Open PDF</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="doc-item">
+                        <div class="doc-main">
+                            <span class="doc-title">DCF Model</span>
+                            <span class="doc-meta">Type: Discounted Cash Flow · Focus: assumptions &amp; valuation bridge</span>
+                        </div>
+                        <a class="open-link" href="modeles/model_dcf.pdf" target="_blank">Open PDF</a>
+                    </div>
+                </li>
+                <!-- Ajoute d’autres analyses ici -->
+            </ul>
+        </div>
+
+        <!-- Onglet 3 : Valuation Report -->
+        <div id="valuation" class="tab">
+            <h2>Valuation Reports</h2>
+            <p class="tab-subtitle">
+                Rapports de valorisation présentant approche multi-critères (trading comps, transaction comps, DCF, LBO) et synthèse des résultats.
+            </p>
+
+            <ul>
+                <li>
+                    <div class="doc-item">
+                        <div class="doc-main">
+                            <span class="doc-title">Valuation Report 1</span>
+                            <span class="doc-meta">Type: Equity valuation · Scope: Full valuation memo</span>
+                        </div>
+                        <a class="open-link" href="projets/analyse1.pdf" target="_blank">Open PDF</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="doc-item">
+                        <div class="doc-main">
+                            <span class="doc-title">Valuation Report 2</span>
+                            <span class="doc-meta">Type: Sector-specific valuation · Focus: methodology comparison</span>
+                        </div>
+                        <a class="open-link" href="projets/analyse2.pdf" target="_blank">Open PDF</a>
+                    </div>
+                </li>
+                <!-- Ajoute d’autres rapports ici -->
+            </ul>
+        </div>
+
+        <div class="footer">
+            Portfolio confidentiel – documents anonymisés et préparés à des fins de présentation uniquement.
+        </div>
     </div>
-
-    <!-- Onglet 1 : OnePagers -->
-    <div id="onepagers" class="tab">
-        <h2>OnePagers</h2>
-        <p>Mes one-pagers et présentations synthétiques :</p>
-
-        <ul>
-            <li><a class="pdf-link" href="pitchbooks/TotalEnergies_OnePager.pdf" target="_blank">OnePager – TotalEnergies</a></li>
-        </ul>
-    </div>
-
-    <!-- Onglet 2 : Investment Analysis -->
-    <div id="investment" class="tab">
-        <h2>Investment Analysis</h2>
-        <p>Analyses financières et stratégiques :</p>
-
-        <ul>
-            <li><a class="pdf-link" href="modeles/model_lbo.pdf" target="_blank">LBO Model</a></li>
-            <li><a class="pdf-link" href="modeles/model_dcf.pdf" target="_blank">DCF Model</a></li>
-        </ul>
-    </div>
-
-    <!-- Onglet 3 : Valuation Report -->
-    <div id="valuation" class="tab">
-        <h2>Valuation Reports</h2>
-        <p>Rapports de valorisation réalisés :</p>
-
-        <ul>
-            <li><a class="pdf-link" href="projets/analyse1.pdf" target="_blank">Valuation Report 1</a></li>
-            <li><a class="pdf-link" href="projets/analyse2.pdf" target="_blank">Valuation Report 2</a></li>
-        </ul>
-    </div>
-
-    <!-- Onglet par défaut -->
-    <script>
-        openTab('onepagers');
-    </script>
-
 </body>
 </html>
