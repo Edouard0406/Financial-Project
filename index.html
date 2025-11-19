@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio M&A – Edouard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Menu onglets */
+        .navbar {
+            display: flex;
+            background-color: #1a1a1a;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #333;
+        }
+
+        /* Contenu */
+        .tab {
+            display: none;
+            padding: 25px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        /* Liste des PDF */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        a.pdf-link {
+            color: #0056a3;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        a.pdf-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <script>
+        function openTab(tabName) {
+            var i, tabContent;
+            tabContent = document.getElementsByClassName("tab");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+    </script>
+
+</head>
+<body>
+
+    <!-- Menu -->
+    <div class="navbar">
+        <a onclick="openTab('pitchbooks')">Pitchbooks</a>
+        <a onclick="openTab('modeles')">Modèles financiers</a>
+        <a onclick="openTab('projets')">Analyses & Projets</a>
+    </div>
+
+    <!-- Onglet 1 -->
+    <div id="pitchbooks" class="tab">
+        <h2>Pitchbooks</h2>
+        <p>Mes présentations et travaux réalisés :</p>
+
+        <ul>
+            <li><a class="pdf-link" href="pitchbooks/pitchbook1.pdf" target="_blank">Pitchbook 1</a></li>
+            <li><a class="pdf-link" href="pitchbooks/pitchbook2.pdf" target="_blank">Pitchbook 2</a></li>
+        </ul>
+    </div>
+
+    <!-- Onglet 2 -->
+    <div id="modeles" class="tab">
+        <h2>Modèles Financiers</h2>
+        <p>DCF, LBO, Comps, Merger Model…</p>
+
+        <ul>
+            <li><a class="pdf-link" href="modeles/model_lbo.pdf" target="_blank">Modèle LBO</a></li>
+            <li><a class="pdf-link" href="modeles/model_dcf.pdf" target="_blank">Modèle DCF</a></li>
+        </ul>
+    </div>
+
+    <!-- Onglet 3 -->
+    <div id="projets" class="tab">
+        <h2>Analyses & Projets</h2>
+        <p>Mes notes, analyses et documents :</p>
+
+        <ul>
+            <li><a class="pdf-link" href="projets/analyse1.pdf" target="_blank">Analyse Projet 1</a></li>
+            <li><a class="pdf-link" href="projets/analyse2.pdf" target="_blank">Analyse Projet 2</a></li>
+        </ul>
+    </div>
+
+    <!-- Onglet par défaut -->
+    <script>
+        openTab('pitchbooks');
+    </script>
+
+</body>
+</html>
